@@ -57,7 +57,7 @@ from neurons.Miner.allocate import (
 from neurons.Miner.container import build_check_container
 from compute.wandb.wandb import ComputeWandb
 from neurons.Miner.allocate import check_allocation, register_allocation
-from neurons.Miner.pow import check_cuda_availability, run_miner_pow
+from neurons.Miner.pow_serverless import check_cuda_availability, run_miner_pow
 from neurons.Miner.specs import RequestSpecsProcessor
 from neurons.Validator.script import check_docker_availability
 
@@ -438,6 +438,7 @@ class Miner:
                 hashcat_path=self.hashcat_path,
                 hashcat_workload_profile=self.hashcat_workload_profile,
                 hashcat_extended_options=self.hashcat_extended_options,
+                challenge_difficulty=synapse.challenge_difficulty,
             )
             synapse.output = result
         except Exception as e:

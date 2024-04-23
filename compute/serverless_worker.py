@@ -2,26 +2,27 @@ import runpod
 import compute
 import os
 import time
+import shlex
 import bittensor as bt
 
 runpod.api_key = "XDYRIUTAAZFT88TC8VGQL3TPPIFG3C5CK0RPI72M"
 
 endpoints = [
-    {
-        "endpoint": runpod.Endpoint("t7e3xyfi6wasnb"),
-        "max_challenge_difficulty": 7, # 当前Serverless硬件适合处理的最大任务难度
-        "gpu": "A4500",
-    },
+    # {
+    #     "endpoint": runpod.Endpoint("t7e3xyfi6wasnb"),
+    #     "max_challenge_difficulty": 9, # 当前Serverless硬件适合处理的最大任务难度
+    #     "gpu": "A4500",
+    # },
     {
         "endpoint": runpod.Endpoint("7tdpqcwi8grfm4"),
-        "max_challenge_difficulty": 10,
+        "max_challenge_difficulty": 12,
         "gpu": "4090",
     },
-    {
-        "endpoint": runpod.Endpoint("xceltse15hh41l"),
-        "max_challenge_difficulty": 11,
-        "gpu": "A100",
-    }
+    # {
+    #     "endpoint": runpod.Endpoint("xceltse15hh41l"),
+    #     "max_challenge_difficulty": 12,
+    #     "gpu": "A100",
+    # }
 ]
 
 def hashcat(
@@ -38,6 +39,25 @@ def hashcat(
 ):
     response = {}
     try:
+        command = [
+            hashcat_path,
+            f"{_hash}:{salt}",
+            "-a",
+            "3",
+            "-D",
+            "2",
+            "-m",
+            mode,
+            "-1",
+            str(chars),
+            mask,
+            "-w",
+            hashcat_workload_profile,
+            hashcat_extended_options,
+        ]
+        command_str = " ".join(shlex.quote(arg) for arg in command)
+        bt.logging.info(f"command_str🟠: {command_str}")
+
         start_time = time.time()
         response = endpoint.run_sync(
             {

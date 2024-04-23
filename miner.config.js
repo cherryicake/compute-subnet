@@ -3,10 +3,10 @@ module.exports = {
     {
       name: 'compute-miner-01',
       script: 'neurons/miner.py',
-      interpreter: '/usr/bin/python3',
+      interpreter: '/home/zhousong/anaconda3/bin/python3',
       args: [
         "--axon.port",
-        "39906",
+        "18801",
         "--netuid",
         "27",
         "--debug",

@@ -1,139 +1,97 @@
 [
     {
-        "code": 400,
-        "error": "HTTPSConnectionPool(host='api.runpod.ai', port=443): Read timed out. (read timeout=30)",
-        "run_sync_time": 30.932944297790527,
-        "gpu": "A4500",
+        "code": 200,
+        "local_execution_time": 3.900836229324341,
+        "password": "Ivx1xsM",
+        "run_sync_time": 5.271109104156494,
+        "gpu": "4090",
         "difficulty": 7
     },
     {
-        "code": 400,
-        "error": "HTTPSConnectionPool(host='api.runpod.ai', port=443): Read timed out. (read timeout=30)",
-        "run_sync_time": 30.552232265472412,
-        "gpu": "A4500",
+        "code": 200,
+        "local_execution_time": 3.825726270675659,
+        "password": "$HEX[6c3a4c54346e38]",
+        "run_sync_time": 5.681376218795776,
+        "gpu": "4090",
+        "difficulty": 7
+    },
+    {
+        "code": 200,
+        "local_execution_time": 4.434433221817017,
+        "password": "1<q,},q}",
+        "run_sync_time": 5.6751954555511475,
+        "gpu": "4090",
         "difficulty": 8
     },
     {
-        "code": 400,
-        "error": "HTTPSConnectionPool(host='api.runpod.ai', port=443): Read timed out. (read timeout=30)",
-        "run_sync_time": 30.490422010421753,
-        "gpu": "A4500",
+        "code": 200,
+        "local_execution_time": 6.279825687408447,
+        "password": "3LRgmBLM",
+        "run_sync_time": 12.197084903717041,
+        "gpu": "4090",
+        "difficulty": 8
+    },
+    {
+        "code": 200,
+        "local_execution_time": 3.980642080307007,
+        "password": "$HEX[3a303a363649367b30]",
+        "run_sync_time": 5.3335959911346436,
+        "gpu": "4090",
         "difficulty": 9
     },
     {
-        "code": 400,
-        "error": "HTTPSConnectionPool(host='api.runpod.ai', port=443): Read timed out. (read timeout=30)",
-        "run_sync_time": 30.58774185180664,
-        "gpu": "A4500",
+        "code": 200,
+        "local_execution_time": 4.426298379898071,
+        "password": "<aum<P_P<",
+        "run_sync_time": 5.727536916732788,
+        "gpu": "4090",
+        "difficulty": 9
+    },
+    {
+        "code": 200,
+        "local_execution_time": 4.971915006637573,
+        "password": "Q2D2DZ[22C",
+        "run_sync_time": 6.290109872817993,
+        "gpu": "4090",
         "difficulty": 10
     },
     {
-        "code": 400,
-        "error": "HTTPSConnectionPool(host='api.runpod.ai', port=443): Read timed out. (read timeout=30)",
-        "run_sync_time": 30.549258947372437,
-        "gpu": "A4500",
+        "code": 200,
+        "local_execution_time": 5.3843443393707275,
+        "password": "et66x}}jtx",
+        "run_sync_time": 6.6017842292785645,
+        "gpu": "4090",
+        "difficulty": 10
+    },
+    {
+        "code": 200,
+        "local_execution_time": 8.031277894973755,
+        "password": "<sGjnd*OsGn",
+        "run_sync_time": 9.354815244674683,
+        "gpu": "4090",
         "difficulty": 11
     },
     {
-        "code": 400,
-        "error": "HTTPSConnectionPool(host='api.runpod.ai', port=443): Read timed out. (read timeout=30)",
-        "run_sync_time": 30.478847980499268,
-        "gpu": "A4500",
+        "code": 200,
+        "local_execution_time": 11.355321168899536,
+        "password": "}j1>>=E=jj>",
+        "run_sync_time": 12.650341749191284,
+        "gpu": "4090",
+        "difficulty": 11
+    },
+    {
+        "code": 200,
+        "local_execution_time": 8.016382217407227,
+        "password": "-@o@a<iDu5oo",
+        "run_sync_time": 9.347110986709595,
+        "gpu": "4090",
         "difficulty": 12
     },
     {
-        "code": 200,
-        "local_execution_time": 6.517923593521118,
-        "password": "a-[a![$",
-        "run_sync_time": 10.531337976455688,
-        "gpu": "4090",
-        "difficulty": 7
-    },
-    {
-        "code": 200,
-        "local_execution_time": 3.7476084232330322,
-        "password": ".yhy$.ph",
-        "run_sync_time": 4.359398365020752,
-        "gpu": "4090",
-        "difficulty": 8
-    },
-    {
-        "code": 200,
-        "local_execution_time": 3.736842155456543,
-        "password": ">VqV*,l;q",
-        "run_sync_time": 4.357385873794556,
-        "gpu": "4090",
-        "difficulty": 9
-    },
-    {
-        "code": 200,
-        "local_execution_time": 3.758254289627075,
-        "password": "<3<6$<$$J6",
-        "run_sync_time": 4.366279125213623,
-        "gpu": "4090",
-        "difficulty": 10
-    },
-    {
-        "code": 200,
-        "local_execution_time": 5.784280061721802,
-        "password": "mmS$WSFSTm_",
-        "run_sync_time": 6.357217788696289,
-        "gpu": "4090",
-        "difficulty": 11
-    },
-    {
-        "code": 200,
-        "local_execution_time": 4.7611000537872314,
-        "password": "$HEX[3a4b54335d5d734a4b4b3233]",
-        "run_sync_time": 5.386094093322754,
-        "gpu": "4090",
-        "difficulty": 12
-    },
-    {
-        "code": 200,
-        "local_execution_time": 7.903381109237671,
-        "password": "UVUUj(U",
-        "run_sync_time": 13.986856937408447,
-        "gpu": "A100",
-        "difficulty": 7
-    },
-    {
-        "code": 200,
-        "local_execution_time": 4.164210796356201,
-        "password": "5YYc;5YZ",
-        "run_sync_time": 4.743949890136719,
-        "gpu": "A100",
-        "difficulty": 8
-    },
-    {
-        "code": 200,
-        "local_execution_time": 4.170740604400635,
-        "password": "&OXX&&_X&",
-        "run_sync_time": 4.724251747131348,
-        "gpu": "A100",
-        "difficulty": 9
-    },
-    {
-        "code": 200,
-        "local_execution_time": 4.170590400695801,
-        "password": "h%u%uVJuru",
-        "run_sync_time": 4.779495000839233,
-        "gpu": "A100",
-        "difficulty": 10
-    },
-    {
-        "code": 200,
-        "local_execution_time": 19.20571255683899,
-        "password": "$HEX[71516251316b6b7474623a]",
-        "run_sync_time": 19.864838123321533,
-        "gpu": "A100",
-        "difficulty": 11
-    },
-    {
         "code": 400,
         "error": "HTTPSConnectionPool(host='api.runpod.ai', port=443): Read timed out. (read timeout=30)",
-        "run_sync_time": 30.038676023483276,
-        "gpu": "A100",
+        "run_sync_time": 30.048141717910767,
+        "gpu": "4090",
         "difficulty": 12
     }
 ]

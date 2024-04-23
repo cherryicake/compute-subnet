@@ -44,8 +44,10 @@ def hashcat_verify(_hash, output) -> Union[str, None]:
             return item.strip().split(":")[-1]
     return None
 
-def select_endpoint():
-    return serverless_worker.endpoints[0]["endpoint"]
+def select_endpoint(challenge_difficulty: int):
+    for endpoint_dict in serverless_worker.endpoints:
+        if challenge_difficulty <= endpoint_dict['max_challenge_difficulty']:
+            return endpoint_dict['endpoint']
 
 # @fifo
 def run_hashcat(
@@ -59,38 +61,41 @@ def run_hashcat(
     hashcat_path: str = compute.miner_hashcat_location,
     hashcat_workload_profile: str = compute.miner_hashcat_workload_profile,
     hashcat_extended_options: str = compute.miner_hashcat_extended_options,
+    challenge_difficulty: int = compute.pow_min_difficulty
 ):
-    start_time = time.time()
     bt.logging.info(f"{run_id}: ♻️  Challenge processing")
 
     unknown_error_message = f"{run_id}: ❌ run_hashcat execution failed"
     try:
-        endpoint = select_endpoint()
+        start_time = time.time()
+        endpoint = select_endpoint(challenge_difficulty)
         response = serverless_worker.hashcat(
             endpoint=endpoint,
             _hash=_hash,
             salt=salt,
             mode=mode,
             chars=chars,
-            mask=maskm
-            
+            mask=mask,
+            timeout=timeout,
+            hashcat_path=hashcat_path,
+            hashcat_workload_profile=hashcat_workload_profile,
+            hashcat_extended_options=hashcat_extended_options,
         )
-        execution_time = time.time() - start_time
-
+        bt.logging.debug(f"Serverless run result🟡: {response}")
+        execution_time = response['run_sync_time']
+        password = response['password']
         # If hashcat returns a valid result
-        if process.returncode == 0:
-            if process.stdout:
-                result = hashcat_verify(_hash, process.stdout)
-                bt.logging.success(
-                    f"{run_id}: ✅ Challenge {result} found in {execution_time:0.2f} seconds !"
-                )
-                return {
-                    "password": result,
-                    "local_execution_time": execution_time,
-                    "error": None,
-                }
+        if response['code'] == 200:
+            bt.logging.success(
+                f"{run_id}: ✅ Challenge {password} found in {execution_time:0.2f} seconds !"
+            )
+            return {
+                "password": password,
+                "local_execution_time": execution_time,
+                "error": None,
+            }
         else:
-            error_message = f"{run_id}: ❌ Hashcat execution failed with code {process.returncode}: {process.stderr}"
+            error_message = f"{run_id}: ❌ Hashcat execution failed with code {response['code']}: {response['error']}"
             bt.logging.warning(error_message)
             return {
                 "password": None,
@@ -133,6 +138,7 @@ def run_miner_pow(
     hashcat_path: str = compute.miner_hashcat_location,
     hashcat_workload_profile: str = compute.miner_hashcat_workload_profile,
     hashcat_extended_options: str = "",
+    challenge_difficulty: int = compute.pow_min_difficulty
 ):
     bt.logging.info(f"{run_id}: 💻 Challenge received")
 
@@ -146,5 +152,6 @@ def run_miner_pow(
         hashcat_path=hashcat_path,
         hashcat_workload_profile=hashcat_workload_profile,
         hashcat_extended_options=hashcat_extended_options,
+        challenge_difficulty=challenge_difficulty,
     )
     return result

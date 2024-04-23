@@ -247,3 +247,5 @@ database.db
 neurons/Miner/app
 
 test_speed_file.dat
+
+wandb/

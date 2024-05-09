@@ -2,8 +2,8 @@ module.exports = {
   apps: [
     {
       name: 'compute-miner-01',
-      script: 'neurons/miner.py',
-      interpreter: '/home/zhousong/anaconda3/bin/python3',
+      script: '/workspace/compute-subnet/neurons/miner.py',
+      interpreter: '/home/zhousong/anaconda3/envs/compute/bin/python3',
       args: [
         "--axon.port",
         "18801",
@@ -12,14 +12,13 @@ module.exports = {
         "--debug",
         "true",
         '--subtensor.chain_endpoint',
-        'ws://34.132.5.74:9944',
+        'ws://10.128.0.6:9944',
         '--wallet.name',
         'tianyue_song_01',
         '--wallet.hotkey',
-        'hotkey01',
+        'hotkey02',
         '--logging.debug',
-        '--logging.trace',
-        '--wandb.off'
+        // '--logging.trace',
       ],
       autorestart: true,
       watch: false,

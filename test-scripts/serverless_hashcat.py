@@ -7,7 +7,7 @@ from compute import serverless_worker
 import time
 import concurrent.futures
 
-difficulty_list = [7,8,9,10,11,12]
+difficulty_list = [10]
 def local_worker(length: int = compute.pow_min_difficulty):
     password, hash, salt, mode, chars, mask = run_validator_pow(length)
     input_data = {
@@ -61,21 +61,22 @@ def serverless_benchmark():
 def serverless_benchmark_parallel():
     benchmarks = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-        for endpoint_dict in serverless_worker.endpoints:
-            for difficulty in difficulty_list:
-                # 每次提交两个任务给线程池
-                future_results = [executor.submit(runpod_worker, endpoint=endpoint_dict['endpoint'], length=difficulty) for _ in range(2)]
-                # 等待获取结果
-                for future in concurrent.futures.as_completed(future_results):
-                    try:
-                        response = future.result()
-                        response['gpu'] = endpoint_dict['gpu']
-                        response['difficulty'] = difficulty
-                        print(response)
-                        benchmarks.append(response)
-                    except Exception as e:
-                        print(f"An error occurred: {e}")
-                time.sleep(5)
+        for _ in range(10):
+            for endpoint_dict in serverless_worker.endpoints:
+                for difficulty in difficulty_list:
+                    # 每次提交两个任务给线程池
+                    future_results = [executor.submit(runpod_worker, endpoint=endpoint_dict['endpoint'], length=difficulty) for _ in range(5)]
+                    # 等待获取结果
+                    for future in concurrent.futures.as_completed(future_results):
+                        try:
+                            response = future.result()
+                            response['gpu'] = endpoint_dict['gpu']
+                            response['difficulty'] = difficulty
+                            print(response)
+                            benchmarks.append(response)
+                        except Exception as e:
+                            print(f"An error occurred: {e}")
+                    time.sleep(5)
     return benchmarks
 if __name__ == "__main__":
     # 本地测试

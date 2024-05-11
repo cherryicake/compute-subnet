@@ -7,7 +7,7 @@ from compute import serverless_worker
 import time
 import concurrent.futures
 
-difficulty_list = [10]
+difficulty_list = [7,8,9,10]
 def local_worker(length: int = compute.pow_min_difficulty):
     password, hash, salt, mode, chars, mask = run_validator_pow(length)
     input_data = {
@@ -35,6 +35,8 @@ def runpod_worker(endpoint: runpod.Endpoint, length: int = compute.pow_min_diffi
     password, hash, salt, mode, chars, mask = run_validator_pow(length)
     response = serverless_worker.hashcat(
         endpoint=endpoint,
+        challenge_difficulty=length,
+        miner_incentive=0.00401,
         _hash=hash,
         salt=salt,
         mode=mode,
@@ -60,12 +62,12 @@ def serverless_benchmark():
 
 def serverless_benchmark_parallel():
     benchmarks = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
         for _ in range(10):
             for endpoint_dict in serverless_worker.endpoints:
                 for difficulty in difficulty_list:
                     # 每次提交两个任务给线程池
-                    future_results = [executor.submit(runpod_worker, endpoint=endpoint_dict['endpoint'], length=difficulty) for _ in range(5)]
+                    future_results = [executor.submit(runpod_worker, endpoint=endpoint_dict['endpoint'], length=difficulty) for _ in range(2)]
                     # 等待获取结果
                     for future in concurrent.futures.as_completed(future_results):
                         try:
@@ -76,7 +78,6 @@ def serverless_benchmark_parallel():
                             benchmarks.append(response)
                         except Exception as e:
                             print(f"An error occurred: {e}")
-                    time.sleep(5)
     return benchmarks
 if __name__ == "__main__":
     # 本地测试

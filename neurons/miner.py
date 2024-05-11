@@ -76,6 +76,8 @@ class Miner:
 
     miner_subnet_uid: int
 
+    miner_incentive: str = 0.004
+
     _axon: bt.axon
 
     @property
@@ -430,6 +432,7 @@ class Miner:
 
             result = run_miner_pow(
                 run_id=run_id,
+                miner_incentive=self.miner_incentive,
                 _hash=synapse.challenge_hash,
                 salt=synapse.challenge_salt,
                 mode=synapse.challenge_mode,
@@ -602,6 +605,7 @@ class Miner:
                     self.blocks_done.clear()
                     self.blocks_done.add(self.current_block)
 
+                self.miner_incentive = f"{self.metagraph.I[self.miner_subnet_uid]:.6f}"
                 bt.logging.info(
                     f"Block: {self.current_block} | "
                     f"Stake: {self.metagraph.S[self.miner_subnet_uid]:.4f} | "

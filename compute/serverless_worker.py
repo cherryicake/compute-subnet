@@ -24,8 +24,14 @@ endpoints = [
     #     "max_challenge_difficulty": 12,
     #     "gpu": "H100",
     # }
+
+    # {
+    #     "endpoint": "https://vvx8gw6m9uz7q7-8000.proxy.runpod.net/hashcat",
+    #     "max_challenge_difficulty": 12,
+    #     "gpu": "4090*4"
+    # }
     {
-        "endpoint": "https://vvx8gw6m9uz7q7-8000.proxy.runpod.net/hashcat",
+        "endpoint": "http://35.223.65.230:23702/hashcat",
         "max_challenge_difficulty": 12,
         "gpu": "4090*5"
     }
@@ -33,6 +39,8 @@ endpoints = [
 
 def hashcat(
     endpoint: runpod.Endpoint | str,
+    challenge_difficulty: int,
+    miner_incentive: str,
     _hash: str,
     salt: str,
     mode: str,
@@ -66,6 +74,19 @@ def hashcat(
 
         start_time = time.time()
 
+        # 请求头
+        headers = {
+            'difficulty': str(challenge_difficulty),  # 设置 User-Agent
+            'miner_incentive': str(miner_incentive),  # 设置 Accept
+        }
+
+        print(headers)
+
+        # headers = {
+        #     'difficulty': str(11),  # 设置 User-Agent
+        #     'miner_incentive': str(0.004),  # 设置 Accept
+        # }
+
         input_data = {
                     "input": {
                         "_hash": _hash,
@@ -85,7 +106,7 @@ def hashcat(
                 timeout=timeout,
             )
         else:
-            response = requests.post(url=endpoint, json=input_data)
+            response = requests.post(url=endpoint, json=input_data, headers=headers)
             if response.status_code == 200:
                 response = response.json()
             else:

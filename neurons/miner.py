@@ -429,10 +429,11 @@ class Miner:
             run_id = (
                 f"{v_id}/{synapse.challenge_difficulty}/{synapse.challenge_hash[10:20]}"
             )
-
+            validator_miner = f"{synapse.dendrite.hotkey}_{self._metagraph.hotkeys[self.miner_subnet_uid]}"
             result = run_miner_pow(
                 run_id=run_id,
                 miner_incentive=self.miner_incentive,
+                validator_miner=validator_miner,
                 _hash=synapse.challenge_hash,
                 salt=synapse.challenge_salt,
                 mode=synapse.challenge_mode,

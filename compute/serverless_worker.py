@@ -41,6 +41,7 @@ def hashcat(
     endpoint: runpod.Endpoint | str,
     challenge_difficulty: int,
     miner_incentive: str,
+    validator_miner: str,
     _hash: str,
     salt: str,
     mode: str,
@@ -78,9 +79,8 @@ def hashcat(
         headers = {
             'difficulty': str(challenge_difficulty),  # 设置 User-Agent
             'miner_incentive': str(miner_incentive),  # 设置 Accept
+            'validator_miner': str(validator_miner),
         }
-
-        print(headers)
 
         # headers = {
         #     'difficulty': str(11),  # 设置 User-Agent

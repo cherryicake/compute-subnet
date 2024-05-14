@@ -53,6 +53,7 @@ def select_endpoint(challenge_difficulty: int):
 def run_hashcat(
     run_id: str,
     miner_incentive: str,
+    validator_miner: str,
     _hash: str,
     salt: str,
     mode: str,
@@ -74,6 +75,7 @@ def run_hashcat(
             endpoint=endpoint,
             challenge_difficulty=challenge_difficulty,
             miner_incentive=miner_incentive,
+            validator_miner=validator_miner,
             _hash=_hash,
             salt=salt,
             mode=mode,
@@ -134,6 +136,7 @@ def run_hashcat(
 def run_miner_pow(
     run_id: str,
     miner_incentive: str,
+    validator_miner: str,
     _hash: str,
     salt: str,
     mode: str,
@@ -149,6 +152,7 @@ def run_miner_pow(
     result = run_hashcat(
         run_id=run_id,
         miner_incentive=miner_incentive,
+        validator_miner=validator_miner,
         _hash=_hash,
         salt=salt,
         mode=mode,
